@@ -629,6 +629,99 @@
       font-style: italic;
     }
 
+
+    /* Message-in-a-Bottle Letter Modal */
+    .letter-card {
+      max-width: 560px;
+      background: linear-gradient(165deg, rgba(11, 38, 66, 0.96), rgba(6, 22, 42, 0.99));
+    }
+    .letter-paper {
+      position: relative;
+      background: linear-gradient(160deg, #fff7e0 0%, #f6e7bd 60%, #ecd8a3 100%);
+      color: #4a2f14;
+      border-radius: 10px;
+      padding: 20px 22px 16px;
+      margin: 6px 0 18px;
+      text-align: left;
+      box-shadow: 0 10px 26px rgba(0, 0, 0, 0.45), inset 0 0 28px rgba(150, 100, 30, 0.18);
+      transform: rotate(-0.8deg);
+      animation: letterUnroll 0.5s ease-out;
+    }
+    .letter-paper::before {
+      content: '';
+      position: absolute;
+      inset: 6px;
+      border: 1px dashed rgba(120, 80, 30, 0.35);
+      border-radius: 6px;
+      pointer-events: none;
+    }
+    @keyframes letterUnroll {
+      from { transform: rotate(-3deg) scaleY(0.2); opacity: 0; }
+      to { transform: rotate(-0.8deg) scaleY(1); opacity: 1; }
+    }
+    .letter-portrait-wrap {
+      background: rgba(14, 116, 144, 0.18);
+      border: 1px solid rgba(120, 80, 30, 0.25);
+      border-radius: 8px;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: center;
+    }
+    #letterPortrait { width: 210px; height: 94px; }
+    .letter-species {
+      font-family: 'Fredoka', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #7c2d12;
+    }
+    .letter-category {
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: #92400e;
+      margin-bottom: 10px;
+    }
+    .letter-body {
+      font-family: Georgia, 'Times New Roman', serif;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      font-style: italic;
+    }
+    .letter-body p { margin-bottom: 8px; }
+    .letter-fact {
+      margin-top: 10px;
+      padding: 8px 10px;
+      background: rgba(180, 120, 40, 0.14);
+      border-left: 3px solid #b45309;
+      border-radius: 4px;
+      font-family: 'Inter', sans-serif;
+      font-style: normal;
+      font-size: 0.82rem;
+      line-height: 1.4;
+      color: #5b3a12;
+    }
+    .letter-sign {
+      text-align: right;
+      margin-top: 10px;
+      font-family: Georgia, serif;
+      font-style: italic;
+      color: #7c2d12;
+    }
+    .letter-reward { color: #fde047; font-weight: 700; margin-bottom: 14px; font-size: 0.95rem; }
+    .species-letter {
+      margin-top: 8px;
+      padding: 7px 9px;
+      background: rgba(253, 224, 71, 0.08);
+      border-left: 3px solid #fbbf24;
+      border-radius: 6px;
+      font-size: 0.72rem;
+      line-height: 1.4;
+      color: #fde68a;
+      text-align: left;
+    }
+    .letter-chip { color: #fde047 !important; border-color: rgba(253, 224, 71, 0.45) !important; }
+
     /* Upgrade Shop Grid */
     .shop-grid {
       display: grid;
@@ -823,6 +916,18 @@
           <span class="stat-badge" style="color: #f9a8d4;"><span id="pearlsText">0</span></span>
         </div>
 
+        <!-- Day / Night Clock -->
+        <div class="glass-pill" id="timePill" title="Time of day — nights are dark and sharks hunt more boldly">
+          <span class="stat-icon" id="timeIcon">🌞</span>
+          <span class="stat-badge" style="color: #fde68a;"><span id="timeText">Day</span></span>
+        </div>
+
+        <!-- Message Bottles Collected -->
+        <div class="glass-pill" title="Messages in Bottles found in this zone — each holds a field letter about a species">
+          <span class="stat-icon">🍾</span>
+          <span class="stat-badge" style="color: #fde68a;"><span id="bottlesText">0/1</span></span>
+        </div>
+
         <!-- Eco-Coins -->
         <div class="glass-pill" title="Eco-Coins — Spend at Surface Boat">
           <span class="stat-icon">🪙</span>
@@ -831,7 +936,7 @@
 
         <!-- Ocean Index [I] Button with Live Discovered Count -->
         <button id="indexBtn" class="icon-btn" title="Open Ocean Index [I] — View Discovered Species" aria-label="Open Ocean Index">
-          📖 <span id="indexHudCount" style="color: #5eead4;">0/8</span> <span style="font-size: 0.74rem; opacity: 0.85;">[I]</span>
+          📖 <span id="indexHudCount" style="color: #5eead4;">0/9</span> <span style="font-size: 0.74rem; opacity: 0.85;">[I]</span>
         </button>
 
         <!-- Mute Toggle -->
@@ -845,7 +950,7 @@
       </button>
 
       <div class="controls-hint">
-        <strong>WASD / Drag</strong> Swim • <strong>SPACE / Hold</strong> Eco-Vacuum • <strong>Swim Near Wildlife</strong> Document Species • <strong>[I]</strong> Ocean Index
+        <strong>WASD / Drag</strong> Swim • <strong>SPACE / Hold</strong> Eco-Vacuum • <strong>Swim Near Wildlife</strong> Document Species • <strong>🦈 Sharks</strong> smell trash — the surface is safe • <strong>🍾 Bottles</strong> Field Letters • <strong>[I]</strong> Ocean Index
       </div>
 
       <div class="action-cluster">
@@ -900,7 +1005,7 @@
       <!-- Discovery Progress Summary -->
       <div class="index-summary-bar">
         <div class="index-progress-row">
-          <span id="indexProgressLabel">Species Documented: 0 / 8 (0%)</span>
+          <span id="indexProgressLabel">Species Documented: 0 / 9 (0%)</span>
           <span id="indexSightingsLabel" style="color: #5eead4;">Total Field Sightings: 0</span>
         </div>
         <div class="index-progress-track">
@@ -910,9 +1015,9 @@
 
       <!-- Filter Tabs: All / Found / Undiscovered -->
       <div class="index-filter-tabs" id="indexFilterTabs">
-        <button class="filter-tab-btn active" data-filter="all">🌊 All Species (8)</button>
+        <button class="filter-tab-btn active" data-filter="all">🌊 All Species (9)</button>
         <button class="filter-tab-btn" data-filter="found">✅ Found (0)</button>
-        <button class="filter-tab-btn" data-filter="unseen">❓ Undiscovered (8)</button>
+        <button class="filter-tab-btn" data-filter="unseen">❓ Undiscovered (9)</button>
       </div>
 
       <!-- Dynamic Species Cards Grid -->
@@ -920,6 +1025,24 @@
 
       <button id="closeIndexBtn" class="primary-btn" style="padding: 11px 28px; font-size: 1.05rem;">
         🌊 Return to Dive
+      </button>
+    </div>
+  </div>
+
+  <!-- Message in a Bottle — Field Letter Modal -->
+  <div id="letterOverlay" class="overlay-backdrop hidden">
+    <div class="modal-card letter-card">
+      <div class="title-badge" style="background: rgba(253,224,71,0.14); border-color: rgba(253,224,71,0.5); color: #fde047;">🍾 Message in a Bottle</div>
+      <div class="letter-paper">
+        <div class="letter-portrait-wrap"><canvas id="letterPortrait" width="210" height="94"></canvas></div>
+        <div class="letter-species" id="letterSpecies">Species</div>
+        <div class="letter-category" id="letterCategory">Category</div>
+        <div class="letter-body" id="letterBody"></div>
+        <div class="letter-sign" id="letterSign">— A Fellow Diver</div>
+      </div>
+      <div class="letter-reward" id="letterReward">+25 🪙 Eco-Coins</div>
+      <button id="closeLetterBtn" class="primary-btn" style="padding: 11px 28px; font-size: 1.05rem;">
+        🌊 Tuck It Away &amp; Keep Diving
       </button>
     </div>
   </div>
@@ -963,7 +1086,7 @@
           <div class="summary-lbl">Wildlife Rescued</div>
         </div>
         <div class="summary-box">
-          <div class="summary-val" id="statSpecies">0 / 8</div>
+          <div class="summary-val" id="statSpecies">0 / 9</div>
           <div class="summary-lbl">Species Documented</div>
         </div>
       </div>
@@ -999,6 +1122,15 @@
         this.vacuumGain = null;
         this.collectCombo = 0;
         this.lastCollectTime = 0;
+        this.musicBus = null;
+        this.bedGain = null;
+        this.bedFilter = null;
+        this.droneGain = null;
+        this.droneOsc = null;
+        this.tPluck = 1.5;
+        this.tPad = 3;
+        this.tWhale = 14;
+        this.tBeat = 0;
       }
 
       init() {
@@ -1007,6 +1139,7 @@
           if (AudioCtx) {
             this.ctx = new AudioCtx();
             this._setupVacuumLoop();
+            this._setupAmbient();
           }
         }
         if (this.ctx && this.ctx.state === 'suspended') {
@@ -1224,6 +1357,358 @@
         osc.stop(now + 0.26);
       }
 
+
+      // ---------- Ambient bed, generative music, shark tension, day/night stingers ----------
+      _noiseBuffer(seconds) {
+        const len = Math.floor(this.ctx.sampleRate * seconds);
+        const buf = this.ctx.createBuffer(1, len, this.ctx.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+        return buf;
+      }
+
+      _setupAmbient() {
+        const c = this.ctx;
+
+        // Music bus with a soft echo for an underwater feel
+        this.musicBus = c.createGain();
+        this.musicBus.gain.value = 0.9;
+        const delay = c.createDelay(1.5);
+        delay.delayTime.value = 0.46;
+        const fb = c.createGain();
+        fb.gain.value = 0.4;
+        const wet = c.createGain();
+        wet.gain.value = 0.5;
+        const echoLp = c.createBiquadFilter();
+        echoLp.type = 'lowpass';
+        echoLp.frequency.value = 2200;
+        this.musicBus.connect(c.destination);
+        this.musicBus.connect(delay);
+        delay.connect(echoLp);
+        echoLp.connect(fb);
+        fb.connect(delay);
+        echoLp.connect(wet);
+        wet.connect(c.destination);
+
+        // Water bed: slowly breathing brown noise
+        const n = c.createBufferSource();
+        const nb = c.createBuffer(1, c.sampleRate * 3, c.sampleRate);
+        const nd = nb.getChannelData(0);
+        let last = 0;
+        for (let i = 0; i < nd.length; i++) {
+          const w = Math.random() * 2 - 1;
+          last = (last + 0.03 * w) / 1.03;
+          nd[i] = last * 3.2;
+        }
+        n.buffer = nb;
+        n.loop = true;
+        this.bedFilter = c.createBiquadFilter();
+        this.bedFilter.type = 'lowpass';
+        this.bedFilter.frequency.value = 700;
+        this.bedGain = c.createGain();
+        this.bedGain.gain.value = 0;
+        n.connect(this.bedFilter);
+        this.bedFilter.connect(this.bedGain);
+        this.bedGain.connect(c.destination);
+        n.start();
+
+        // Slow swell on the bed
+        const lfo = c.createOscillator();
+        const lfoGain = c.createGain();
+        lfo.frequency.value = 0.11;
+        lfoGain.gain.value = 120;
+        lfo.connect(lfoGain);
+        lfoGain.connect(this.bedFilter.frequency);
+        lfo.start();
+
+        // Shark tension drone
+        this.droneOsc = c.createOscillator();
+        this.droneOsc.type = 'sawtooth';
+        this.droneOsc.frequency.value = 41;
+        const droneLp = c.createBiquadFilter();
+        droneLp.type = 'lowpass';
+        droneLp.frequency.value = 130;
+        this.droneGain = c.createGain();
+        this.droneGain.gain.value = 0;
+        this.droneOsc.connect(droneLp);
+        droneLp.connect(this.droneGain);
+        this.droneGain.connect(c.destination);
+        this.droneOsc.start();
+      }
+
+      updateAmbient(dt, st) {
+        if (!this.ctx || !this.musicBus) return;
+        const c = this.ctx;
+        const now = c.currentTime;
+        const depth = Math.max(0, Math.min(1, st.depth));
+        const day = st.daylight;
+        const threat = st.threat;
+        const on = this.muted ? 0 : 1;
+
+        this.bedGain.gain.setTargetAtTime(on * (0.03 + 0.05 * depth), now, 0.4);
+        this.bedFilter.frequency.setTargetAtTime(Math.max(140, 820 - 560 * depth - 140 * (1 - day)), now, 0.5);
+        this.musicBus.gain.setTargetAtTime(on * (0.9 - 0.5 * threat), now, 0.3);
+        this.droneGain.gain.setTargetAtTime(on * threat * 0.17, now, 0.25);
+        this.droneOsc.frequency.setTargetAtTime(41 + threat * 10, now, 0.3);
+
+        if (this.muted) return;
+
+        this.tPluck -= dt;
+        if (this.tPluck <= 0) {
+          this.tPluck = day > 0.5 ? 1.3 + Math.random() * 2.0 : 2.8 + Math.random() * 3.4;
+          this._pluck(day, depth);
+        }
+
+        this.tPad -= dt;
+        if (this.tPad <= 0) {
+          this.tPad = 9 + Math.random() * 5;
+          this._pad(day);
+        }
+
+        if (day < 0.35) {
+          this.tWhale -= dt;
+          if (this.tWhale <= 0) {
+            this.tWhale = 20 + Math.random() * 18;
+            this._whale();
+          }
+        }
+
+        if (threat > 0.08) {
+          this.tBeat -= dt;
+          if (this.tBeat <= 0) {
+            this.tBeat = 1.15 - 0.72 * threat;
+            this._thump(threat);
+          }
+        } else {
+          this.tBeat = 0;
+        }
+      }
+
+      _pluck(day, depth) {
+        const c = this.ctx;
+        const now = c.currentTime;
+        const isDay = day > 0.5;
+        const scale = isDay
+          ? [523.25, 587.33, 659.25, 783.99, 880.0, 1046.5]
+          : [220.0, 261.63, 293.66, 329.63, 392.0, 440.0];
+        const count = Math.random() < 0.3 ? 2 : 1;
+        for (let i = 0; i < count; i++) {
+          const f = scale[Math.floor(Math.random() * scale.length)] * (depth > 0.6 && isDay ? 0.5 : 1);
+          const t0 = now + i * 0.28;
+          const dur = isDay ? 1.5 : 2.8;
+          const o1 = c.createOscillator();
+          const o2 = c.createOscillator();
+          const g = c.createGain();
+          const lp = c.createBiquadFilter();
+          o1.type = 'sine';
+          o2.type = 'triangle';
+          o1.frequency.value = f;
+          o2.frequency.value = f * 2.005;
+          lp.type = 'lowpass';
+          lp.frequency.value = isDay ? 2600 : 1100;
+          g.gain.setValueAtTime(0.0001, t0);
+          g.gain.exponentialRampToValueAtTime(isDay ? 0.06 : 0.055, t0 + 0.015);
+          g.gain.exponentialRampToValueAtTime(0.0001, t0 + dur);
+          o1.connect(lp);
+          o2.connect(lp);
+          lp.connect(g);
+          g.connect(this.musicBus);
+          o1.start(t0);
+          o2.start(t0);
+          o1.stop(t0 + dur + 0.05);
+          o2.stop(t0 + dur + 0.05);
+        }
+      }
+
+      _pad(day) {
+        const c = this.ctx;
+        const now = c.currentTime;
+        const chord = day > 0.5
+          ? [130.81, 196.0, 261.63, 329.63]
+          : [110.0, 164.81, 220.0, 246.94];
+        const lp = c.createBiquadFilter();
+        lp.type = 'lowpass';
+        lp.frequency.value = day > 0.5 ? 900 : 520;
+        lp.connect(this.musicBus);
+        for (const f of chord) {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.type = 'sine';
+          o.frequency.value = f * (1 + (Math.random() - 0.5) * 0.004);
+          g.gain.setValueAtTime(0.0001, now);
+          g.gain.linearRampToValueAtTime(0.03, now + 2.4);
+          g.gain.linearRampToValueAtTime(0.0001, now + 8.5);
+          o.connect(g);
+          g.connect(lp);
+          o.start(now);
+          o.stop(now + 8.6);
+        }
+      }
+
+      _whale() {
+        const c = this.ctx;
+        const now = c.currentTime;
+        const o = c.createOscillator();
+        const vib = c.createOscillator();
+        const vibGain = c.createGain();
+        const g = c.createGain();
+        const lp = c.createBiquadFilter();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(150, now);
+        o.frequency.exponentialRampToValueAtTime(270, now + 1.4);
+        o.frequency.exponentialRampToValueAtTime(170, now + 3.8);
+        vib.frequency.value = 5.5;
+        vibGain.gain.value = 7;
+        vib.connect(vibGain);
+        vibGain.connect(o.frequency);
+        lp.type = 'lowpass';
+        lp.frequency.value = 520;
+        g.gain.setValueAtTime(0.0001, now);
+        g.gain.linearRampToValueAtTime(0.08, now + 1.0);
+        g.gain.linearRampToValueAtTime(0.0001, now + 4.0);
+        o.connect(lp);
+        lp.connect(g);
+        g.connect(this.musicBus);
+        o.start(now);
+        vib.start(now);
+        o.stop(now + 4.1);
+        vib.stop(now + 4.1);
+      }
+
+      _thump(threat) {
+        const c = this.ctx;
+        const now = c.currentTime;
+        [0, 0.17].forEach((off, i) => {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.type = 'sine';
+          o.frequency.setValueAtTime(72, now + off);
+          o.frequency.exponentialRampToValueAtTime(36, now + off + 0.15);
+          g.gain.setValueAtTime(0.0001, now + off);
+          g.gain.exponentialRampToValueAtTime((0.12 + threat * 0.18) * (i ? 0.65 : 1), now + off + 0.012);
+          g.gain.exponentialRampToValueAtTime(0.0001, now + off + 0.2);
+          o.connect(g);
+          g.connect(c.destination);
+          o.start(now + off);
+          o.stop(now + off + 0.21);
+        });
+      }
+
+      playSharkWarning() {
+        if (this.muted || !this.ctx) return;
+        const c = this.ctx;
+        const now = c.currentTime;
+        const seq = [[0, 82.41], [0.42, 87.31], [0.8, 82.41], [1.06, 87.31], [1.28, 82.41], [1.46, 87.31]];
+        for (const [off, f] of seq) {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          const lp = c.createBiquadFilter();
+          o.type = 'sawtooth';
+          o.frequency.value = f;
+          lp.type = 'lowpass';
+          lp.frequency.value = 380;
+          g.gain.setValueAtTime(0.0001, now + off);
+          g.gain.exponentialRampToValueAtTime(0.2, now + off + 0.03);
+          g.gain.exponentialRampToValueAtTime(0.0001, now + off + 0.34);
+          o.connect(lp);
+          lp.connect(g);
+          g.connect(c.destination);
+          o.start(now + off);
+          o.stop(now + off + 0.36);
+        }
+      }
+
+      playSharkBite() {
+        if (this.muted || !this.ctx) return;
+        const c = this.ctx;
+        const now = c.currentTime;
+
+        const src = c.createBufferSource();
+        src.buffer = this._noiseBuffer(0.25);
+        const bp = c.createBiquadFilter();
+        bp.type = 'bandpass';
+        bp.frequency.value = 520;
+        bp.Q.value = 0.8;
+        const ng = c.createGain();
+        ng.gain.setValueAtTime(0.28, now);
+        ng.gain.exponentialRampToValueAtTime(0.001, now + 0.22);
+        src.connect(bp);
+        bp.connect(ng);
+        ng.connect(c.destination);
+        src.start(now);
+
+        const o = c.createOscillator();
+        const g = c.createGain();
+        o.type = 'sine';
+        o.frequency.setValueAtTime(110, now);
+        o.frequency.exponentialRampToValueAtTime(34, now + 0.3);
+        g.gain.setValueAtTime(0.35, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.32);
+        o.connect(g);
+        g.connect(c.destination);
+        o.start(now);
+        o.stop(now + 0.34);
+
+        const s = c.createOscillator();
+        const sg = c.createGain();
+        s.type = 'sawtooth';
+        s.frequency.setValueAtTime(240, now);
+        s.frequency.exponentialRampToValueAtTime(60, now + 0.25);
+        sg.gain.setValueAtTime(0.14, now);
+        sg.gain.exponentialRampToValueAtTime(0.001, now + 0.26);
+        s.connect(sg);
+        sg.connect(c.destination);
+        s.start(now);
+        s.stop(now + 0.28);
+      }
+
+      playBottleClink() {
+        if (this.muted || !this.ctx) return;
+        const c = this.ctx;
+        const now = c.currentTime;
+        [2349.3, 3136.0, 4186.0].forEach((f, i) => {
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.type = 'sine';
+          o.frequency.setValueAtTime(f, now + i * 0.04);
+          g.gain.setValueAtTime(0.0001, now + i * 0.04);
+          g.gain.exponentialRampToValueAtTime(0.09, now + i * 0.04 + 0.01);
+          g.gain.exponentialRampToValueAtTime(0.0001, now + i * 0.04 + 0.35);
+          o.connect(g);
+          g.connect(c.destination);
+          o.start(now + i * 0.04);
+          o.stop(now + i * 0.04 + 0.38);
+        });
+      }
+
+      _stinger(notes, type, step, gainVal) {
+        if (this.muted || !this.ctx || !this.musicBus) return;
+        const c = this.ctx;
+        const now = c.currentTime;
+        notes.forEach((f, i) => {
+          const t0 = now + i * step;
+          const o = c.createOscillator();
+          const g = c.createGain();
+          o.type = type;
+          o.frequency.value = f;
+          g.gain.setValueAtTime(0.0001, t0);
+          g.gain.exponentialRampToValueAtTime(gainVal, t0 + 0.03);
+          g.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.6);
+          o.connect(g);
+          g.connect(this.musicBus);
+          o.start(t0);
+          o.stop(t0 + 1.7);
+        });
+      }
+
+      playDawn() {
+        this._stinger([392.0, 523.25, 659.25, 783.99, 1046.5], 'sine', 0.22, 0.1);
+      }
+
+      playDusk() {
+        this._stinger([783.99, 659.25, 523.25, 392.0, 329.63], 'triangle', 0.26, 0.09);
+      }
+
       playSonar() {
         if (this.muted || !this.ctx) return;
         const now = this.ctx.currentTime;
@@ -1317,8 +1802,101 @@
         habitat: 'All Zones • 70%+ Purity',
         hint: 'Purify 70% of the ocean to spot dolphins leaping near sunlit surface waves.',
         bio: 'Playful and curious, dolphins only return when surface waters are crystal clear and free of oil and plastic.'
+      },
+      {
+        id: 'shark',
+        number: '#09',
+        name: 'Slate Reef Shark',
+        category: 'Apex Predator',
+        habitat: 'All Zones • Open Water',
+        hint: 'Patrols mid-water and smells trash in your bag. Stay calm and scan one before it reaches you!',
+        bio: 'A sleek slate-grey hunter with a keen nose. It keeps the reef in balance, so treat it with respect and keep your distance.'
       }
     ];
+
+
+    // ---------------------------------------------------------------------------
+    // 2B. MESSAGE-IN-A-BOTTLE FIELD LETTERS (one species fact per bottle)
+    // ---------------------------------------------------------------------------
+    const SHARKS_PER_ZONE = [1, 2, 3];
+    const DAY_LENGTH_SECONDS = 210;
+    const BOTTLES_PER_ZONE = [1, 1, 2];
+    const BOTTLE_COIN_REWARD = 25;
+
+    const SPECIES_LETTERS = {
+      rosy: {
+        from: 'Marisol, reef surveyor',
+        paragraphs: [
+          'Dear diver, the little rosy chromis you keep spotting is a damselfish, and it is a born team player. Whole schools hover just above the coral, snacking on drifting plankton.',
+          'The moment something bigger swims by, they all dart down into the branches like it was rehearsed.'
+        ],
+        fact: 'Fun fact: chromis damselfish depend on live coral for shelter. When reefs bleach or die, their numbers fall quickly.'
+      },
+      sky: {
+        from: 'Dr. Okafor, marine biologist',
+        paragraphs: [
+          'You know the sky-blue regal tang from the movies, but out here it earns its keep. It grazes algae off the reef, which stops seaweed from smothering young coral.',
+          'Look closely near its tail: tangs are surgeonfish and carry a tiny, scalpel-sharp spine on each side. Handle with respect!'
+        ],
+        fact: 'Fun fact: regal tangs live in the Indo-Pacific and are often found hiding in coral crevices at night.'
+      },
+      amber: {
+        from: 'Captain Beck, dive instructor',
+        paragraphs: [
+          'The puffer is a terrible sprinter, so it invented a clever defense. When threatened it gulps in water and swells into a spiny ball far too big to swallow.',
+          'Its teeth are fused into a hard beak, perfect for cracking snails and crabs. It also steers by flapping tiny fins, almost like a hovering helicopter.'
+        ],
+        fact: 'Fun fact: many pufferfish carry a potent toxin called tetrodotoxin, which makes them a risky meal for predators.'
+      },
+      jellyfish: {
+        from: 'Professor Imani, plankton lab',
+        paragraphs: [
+          'Jellyfish have no brain, no heart and no bones. They are about 95% water, and they have been drifting through the oceans for hundreds of millions of years, long before dinosaurs.',
+          'Their tentacles are lined with stinging cells that fire in a flash. Keep your distance, and do not take chances with the pretty ones!'
+        ],
+        fact: 'Fun fact: sea turtles often mistake floating plastic bags for jellyfish, which is why every bag you cut loose helps.'
+      },
+      turtle: {
+        from: 'Ranger Tui, turtle patrol',
+        paragraphs: [
+          'Green sea turtles are named for the greenish color of their fat, a result of an adult diet of seagrass and algae. Grazing keeps seagrass meadows short and healthy.',
+          'Females swim thousands of kilometers and often return to nest on the very beach where they hatched. At rest, a turtle can hold its breath for hours.'
+        ],
+        fact: 'Fun fact: the temperature of the sand decides whether a hatchling is male or female. Warmer nests produce more females.'
+      },
+      clam: {
+        from: 'Old Sailor Pearl, retired diver',
+        paragraphs: [
+          'The giant clam is the heavyweight of the seabed. The biggest can grow over a meter across, weigh more than 200 kilograms, and live for a hundred years or more.',
+          'Inside its colorful lips live tiny algae. They make sugar from sunlight and share it with the clam, and in return the clam gives them a safe home.'
+        ],
+        fact: 'Fun fact: giant clams are protected in many countries because overharvesting and warming seas have made them rare.'
+      },
+      manta: {
+        from: 'Dr. Reyes, ray researcher',
+        paragraphs: [
+          'Manta rays are the largest rays in the ocean, with wings that can stretch up to about seven meters. They glide along with their mouths wide open, filtering clouds of plankton.',
+          'Every manta has a unique pattern of spots on its belly. Scientists use these like fingerprints to recognize individuals year after year.'
+        ],
+        fact: 'Fun fact: mantas have one of the largest brains of any fish, and they visit reef cleaning stations to have parasites picked off.'
+      },
+      shark: {
+        from: 'Dr. Alvarez, shark biologist',
+        paragraphs: [
+          'Sharks are older than trees and older than the dinosaurs, and they have been swimming for more than 400 million years. Their skeletons are made of cartilage, the same bendy material as your ears, not bone.',
+          'A shark can sense the faint electric fields of living animals through tiny pores on its snout, and it keeps losing and regrowing teeth its whole life. Stay calm, move steadily, and head for the surface if one gets curious.'
+        ],
+        fact: 'Fun fact: sharks keep reef food webs balanced, and many species are now threatened by overfishing and by getting tangled in nets.'
+      },
+      dolphin: {
+        from: 'Kai, boat captain',
+        paragraphs: [
+          'Bottlenose dolphins give themselves names! Each one develops a signature whistle, and friends call back to it, much like you would call out to a friend.',
+          'They rest one half of their brain at a time, so they can keep surfacing for air while they sleep. And they use clicks and echoes to see with sound.'
+        ],
+        fact: 'Fun fact: dolphins live in tight family pods and avoid waters thick with oil and plastic. Seeing one is a sure sign that you are making a difference.'
+      }
+    };
 
     // ---------------------------------------------------------------------------
     // 3. ZONE CONFIGURATIONS & UPGRADE DEFINITIONS
@@ -1482,7 +2060,8 @@
         flippers: 1,
         vacuum: 1
       },
-      discoveredSpecies: {}
+      discoveredSpecies: {},
+      lettersFound: {}
     };
 
     for (const sp of SPECIES_CATALOG) {
@@ -1587,6 +2166,7 @@
         bag: [],
         vacuumActive: false,
         oilCoatTimer: 0,
+        jellySlowTimer: 0,
         stunTimer: 0,
         emergencyAscent: false,
         nearBoat: false,
@@ -1604,6 +2184,15 @@
       jellyfish: [],
       giantPearlClams: [],
       ecoPearls: [],
+      bottles: [],
+      currentLetter: null,
+      sharks: [],
+      sharkThreat: 0,
+      sharkWarnCooldown: 0,
+      dayTime: 0.36,
+      daylight: 1,
+      sunHeight: 1,
+      wasDay: true,
       ambientFish: [],
       heroCreatures: [],
       particles: [],
@@ -1649,6 +2238,217 @@
       }
     }
 
+
+    // ---------------------------------------------------------------------------
+    // 5B. MESSAGE IN A BOTTLE — OPEN & READ FIELD LETTER
+    // ---------------------------------------------------------------------------
+    function openBottleLetter(bottle) {
+      if (bottle.collected) return;
+      bottle.collected = true;
+      const letter = SPECIES_LETTERS[bottle.speciesId];
+      const meta = SPECIES_CATALOG.find((sp) => sp.id === bottle.speciesId);
+      if (!letter || !meta) return;
+
+      const firstTime = !playerStats.lettersFound[bottle.speciesId];
+      playerStats.lettersFound[bottle.speciesId] = true;
+      playerStats.coins += BOTTLE_COIN_REWARD;
+
+      sound.setVacuumActive(false);
+      sound.playBottleClink();
+      sound.playDiscovery();
+      spawnParticles(bottle.x, bottle.y, 18, '#fde047', 105, 4);
+      spawnParticles(bottle.x, bottle.y, 10, '#ffffff', 80, 3);
+
+      game.currentLetter = bottle.speciesId;
+      game.previousMode = 'playing';
+      game.mode = 'letter';
+
+      document.getElementById('letterSpecies').textContent = meta.name;
+      document.getElementById('letterCategory').textContent = `${meta.number} • ${meta.category}`;
+      document.getElementById('letterBody').innerHTML =
+        letter.paragraphs.map((t) => `<p>${t}</p>`).join('') +
+        `<div class="letter-fact">${letter.fact}</div>`;
+      document.getElementById('letterSign').textContent = `— ${letter.from}`;
+      document.getElementById('letterReward').textContent =
+        `+${BOTTLE_COIN_REWARD} 🪙 Eco-Coins${firstTime ? ' • Saved to your Ocean Index [I]' : ' • Already in your Ocean Index'}`;
+      document.getElementById('letterOverlay').classList.remove('hidden');
+      updateHUD();
+    }
+
+    function closeBottleLetter() {
+      if (game.mode !== 'letter') return;
+      document.getElementById('letterOverlay').classList.add('hidden');
+      game.mode = 'playing';
+      game.currentLetter = null;
+      const left = game.bottles.filter((b) => !b.collected).length;
+      if (left > 0) {
+        showToast(`🍾 ${left} more message in a bottle drifting in this zone!`);
+      }
+    }
+
+    function renderLetterPortrait() {
+      if (game.mode !== 'letter' || !game.currentLetter) return;
+      const c = document.getElementById('letterPortrait');
+      const lctx = c.getContext('2d');
+      lctx.clearRect(0, 0, c.width, c.height);
+      drawSpeciesPortraitToContext(lctx, game.currentLetter, c.width, c.height, game.time);
+    }
+
+
+    // ---------------------------------------------------------------------------
+    // 5C. DAY / NIGHT CYCLE
+    // ---------------------------------------------------------------------------
+    function smoothstep(a, b, x) {
+      const t = Math.max(0, Math.min(1, (x - a) / (b - a)));
+      return t * t * (3 - 2 * t);
+    }
+
+    function computeDayLight() {
+      game.sunHeight = Math.sin(Math.PI * 2 * (game.dayTime - 0.25));
+      game.daylight = smoothstep(-0.22, 0.32, game.sunHeight);
+    }
+
+    function updateDayCycle(dt) {
+      game.dayTime = (game.dayTime + dt / DAY_LENGTH_SECONDS) % 1;
+      computeDayLight();
+      const isDay = game.daylight > 0.5;
+      if (isDay !== game.wasDay) {
+        game.wasDay = isDay;
+        if (isDay) {
+          sound.playDawn();
+          showToast('🌅 Sunrise! The reef warms up and sharks calm down.');
+        } else {
+          sound.playDusk();
+          showToast('🌙 Night falls! Jellyfish glow, but sharks hunt more boldly.');
+        }
+      }
+    }
+
+    function getTimeOfDayLabel() {
+      const h = game.sunHeight;
+      const morning = game.dayTime < 0.5;
+      if (h > 0.32) return { icon: '🌞', text: 'Day' };
+      if (h > -0.22) return morning ? { icon: '🌅', text: 'Dawn' } : { icon: '🌇', text: 'Dusk' };
+      return { icon: '🌙', text: 'Night' };
+    }
+
+    // ---------------------------------------------------------------------------
+    // 5D. REEF SHARKS — PATROL, SMELL TRASH, CHASE, BITE
+    // ---------------------------------------------------------------------------
+    function updateSharks(dt) {
+      const z = ZONES[game.zoneIndex];
+      const diver = game.diver;
+      const night = 1 - game.daylight;
+      const safe = diver.y < SURFACE_Y + 95;
+      const hasTrash = diver.bag.length > 0;
+      const detect = (hasTrash ? 440 : 150) * (1 + 0.3 * night);
+      let threat = 0;
+
+      if (game.sharkWarnCooldown > 0) game.sharkWarnCooldown -= dt;
+
+      for (const sh of game.sharks) {
+        sh.phase += dt * (sh.state === 'chase' ? 9 : 5);
+        if (sh.biteCooldown > 0) sh.biteCooldown -= dt;
+        if (sh.warnedCooldown > 0) sh.warnedCooldown -= dt;
+
+        updateScannerOnEntity(sh, 'shark', sh.x, sh.y, 34, dt);
+
+        const dx = diver.x - sh.x;
+        const dy = diver.y - sh.y;
+        const d = Math.hypot(dx, dy) || 1;
+
+        if (sh.state === 'retreat') {
+          sh.retreatTimer -= dt;
+          const away = Math.atan2(-dy, -dx);
+          const sp = sh.speedBase * 0.9;
+          sh.vx += (Math.cos(away) * sp - sh.vx) * Math.min(1, 3 * dt);
+          sh.vy += (Math.sin(away) * sp - sh.vy) * Math.min(1, 3 * dt);
+          if (sh.retreatTimer <= 0) sh.state = 'patrol';
+        } else if (!safe && d < detect) {
+          if (sh.state !== 'chase') {
+            sh.state = 'chase';
+            if (sh.warnedCooldown <= 0 && game.sharkWarnCooldown <= 0) {
+              sh.warnedCooldown = 9;
+              game.sharkWarnCooldown = 4;
+              sound.playSharkWarning();
+              addFloatingText(sh.x, sh.y - 40, '🦈 !', '#fca5a5');
+              showToast(hasTrash
+                ? '🦈 A shark smells the trash in your bag! Swim to the surface — it is safe there!'
+                : '🦈 A shark is circling close! Keep your distance.');
+            }
+          }
+          const sp = sh.speedBase * (1 + 0.12 * night) * (hasTrash ? 1 : 0.8);
+          sh.vx += ((dx / d) * sp - sh.vx) * Math.min(1, 2.6 * dt);
+          sh.vy += ((dy / d) * sp - sh.vy) * Math.min(1, 2.6 * dt);
+          threat = Math.max(threat, Math.max(0, Math.min(1, 1 - d / (detect * 0.95))));
+
+          if (d < 42 && sh.biteCooldown <= 0 && diver.stunTimer <= 0 && !diver.emergencyAscent) {
+            sharkBite(sh, dx, dy, d);
+          }
+        } else {
+          if (sh.state === 'chase') sh.state = 'patrol';
+          sh.retargetTimer -= dt;
+          if (sh.retargetTimer <= 0) {
+            sh.retargetTimer = 3 + Math.random() * 5;
+            sh.targetY = SURFACE_Y + 260 + Math.random() * Math.max(100, getSeabedY(sh.x) - SURFACE_Y - 440);
+            if (Math.random() < 0.3) sh.vx = -sh.vx;
+          }
+          const dir = sh.vx >= 0 ? 1 : -1;
+          const cruise = 62 + game.zoneIndex * 8;
+          sh.vx += (dir * cruise - sh.vx) * Math.min(1, 1.2 * dt);
+          sh.vy += ((sh.targetY - sh.y) * 0.5 - sh.vy) * Math.min(1, 1.5 * dt);
+        }
+
+        sh.x += sh.vx * dt;
+        sh.y += sh.vy * dt;
+
+        if (sh.x < 120) { sh.x = 120; sh.vx = Math.abs(sh.vx); }
+        if (sh.x > z.worldWidth - 120) { sh.x = z.worldWidth - 120; sh.vx = -Math.abs(sh.vx); }
+        sh.y = Math.max(SURFACE_Y + 130, Math.min(getSeabedY(sh.x) - 45, sh.y));
+
+        if (Math.abs(sh.vx) > 8) sh.facing = sh.vx >= 0 ? 1 : -1;
+        const targetAng = Math.atan2(sh.vy, Math.abs(sh.vx) + 60) * 0.7;
+        sh.angle = lerp(sh.angle, targetAng, 6 * dt);
+      }
+
+      game.sharkThreat = lerp(game.sharkThreat, threat, Math.min(1, 4 * dt));
+    }
+
+    function sharkBite(sh, dx, dy, d) {
+      const diver = game.diver;
+      sh.biteCooldown = 2.6;
+      sh.state = 'retreat';
+      sh.retreatTimer = 1.7;
+
+      const ang = Math.atan2(dy, dx);
+      diver.vx = Math.cos(ang) * 360;
+      diver.vy = Math.sin(ang) * 360;
+      diver.stunTimer = 0.6;
+      diver.oxygen = Math.max(0, diver.oxygen - 10);
+
+      let lost = 0;
+      const loseCount = Math.min(diver.bag.length, 2 + game.zoneIndex);
+      for (let i = 0; i < loseCount; i++) {
+        const idx = Math.floor(Math.random() * diver.bag.length);
+        const item = diver.bag.splice(idx, 1)[0];
+        game.trashItems.push({
+          ...item,
+          x: diver.x + (Math.random() - 0.5) * 70,
+          y: diver.y + (Math.random() - 0.5) * 50,
+          vx: (Math.random() - 0.5) * 160,
+          vy: -30 + Math.random() * 60,
+          noPickupUntil: game.time + 1.6
+        });
+        lost++;
+      }
+
+      sound.playSharkBite();
+      spawnParticles(diver.x, diver.y, 18, '#fb7185', 130, 4.5);
+      spawnParticles(diver.x, diver.y, 10, '#ffffff', 90, 3);
+      addFloatingText(diver.x, diver.y - 26,
+        lost > 0 ? `🦈 CHOMP! -10 O₂ • dropped ${lost} trash` : '🦈 CHOMP! -10 O₂', '#fca5a5');
+    }
+
     // ---------------------------------------------------------------------------
     // 6. INPUT HANDLING (Keyboard + Mouse + Touch)
     // ---------------------------------------------------------------------------
@@ -1665,6 +2465,12 @@
       keys[e.code] = true;
       if (['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(e.code)) {
         if (game.mode === 'playing') e.preventDefault();
+      }
+
+      if (game.mode === 'letter' && (e.code === 'Escape' || e.code === 'Enter' || e.code === 'Space')) {
+        e.preventDefault();
+        closeBottleLetter();
+        return;
       }
 
       if (e.code === 'KeyI') {
@@ -1829,6 +2635,7 @@
       game.diver.oxygen = getMaxOxygen();
       game.diver.bag = [];
       game.diver.oilCoatTimer = 0;
+      game.diver.jellySlowTimer = 0;
       game.diver.stunTimer = 0;
       game.diver.emergencyAscent = false;
 
@@ -1865,6 +2672,58 @@
           tilt: (Math.random() - 0.5) * 0.14
         });
       }
+
+      // Messages in Bottles (field letters about species)
+      game.bottles = [];
+      game.currentLetter = null;
+      {
+        const bottleCount = BOTTLES_PER_ZONE[index] || 1;
+        const allIds = SPECIES_CATALOG.map((sp) => sp.id);
+        let pool = allIds.filter((id) => !playerStats.lettersFound[id]);
+        if (pool.length < bottleCount) pool = allIds.slice();
+        for (let i = 0; i < bottleCount; i++) {
+          const pick = pool.splice(Math.floor(Math.random() * pool.length), 1)[0];
+          const span = (W - 640) / bottleCount;
+          const bx = 420 + i * span + span * (0.2 + Math.random() * 0.6);
+          game.bottles.push({
+            x: bx,
+            y: getSeabedY(bx) - 16,
+            speciesId: pick,
+            collected: false,
+            phase: Math.random() * Math.PI * 2,
+            tilt: -0.9 + (Math.random() - 0.5) * 0.4
+          });
+        }
+      }
+
+      // Reef Sharks (hunt divers who carry trash)
+      game.sharks = [];
+      game.sharkThreat = 0;
+      game.sharkWarnCooldown = 0;
+      for (let i = 0; i < (SHARKS_PER_ZONE[index] || 1); i++) {
+        const frac = (i + 0.5) / (SHARKS_PER_ZONE[index] || 1);
+        const sx = 760 + frac * (W - 1000) + (Math.random() - 0.5) * 120;
+        const sy = SURFACE_Y + 300 + Math.random() * Math.max(120, H - SURFACE_Y - 700);
+        game.sharks.push({
+          x: sx,
+          y: sy,
+          vx: (Math.random() < 0.5 ? -1 : 1) * 62,
+          vy: 0,
+          facing: 1,
+          angle: 0,
+          phase: Math.random() * Math.PI * 2,
+          state: 'patrol',
+          retreatTimer: 0,
+          biteCooldown: 0,
+          warnedCooldown: 0,
+          targetY: sy,
+          retargetTimer: 3 + Math.random() * 4,
+          scanProgress: 0,
+          documented: false,
+          speedBase: 138 + index * 16
+        });
+      }
+      computeDayLight();
 
       // Corals & Seaweed Props
       game.corals = [];
@@ -2131,7 +2990,7 @@
       for (const f of game.ambientFish) {
         if (purityNormIdle < f.threshold) continue;
         f.phase += dt * 6;
-        f.x += f.vx * dt;
+        f.x += f.vx * dt * (1 - 0.45 * (1 - game.daylight));
         f.y += Math.sin(f.phase * 0.5) * 12 * dt;
         if (f.rescuedGlow > 0) f.rescuedGlow = Math.max(0, f.rescuedGlow - dt);
         if (f.x < -50) f.x = z.worldWidth + 50;
@@ -2161,6 +3020,8 @@
       // 1. Diver Controls & Underwater Physics
       if (diver.stunTimer > 0) diver.stunTimer -= dt;
       if (diver.oilCoatTimer > 0) diver.oilCoatTimer -= dt;
+      if (diver.jellySlowTimer > 0) diver.jellySlowTimer -= dt;
+      updateDayCycle(dt);
 
       let ax = 0;
       let ay = 0;
@@ -2198,7 +3059,8 @@
       }
 
       const oilSlow = diver.oilCoatTimer > 0 ? 0.58 : 1.0;
-      const accel = getSwimAccel() * oilSlow;
+      const jellySlow = diver.jellySlowTimer > 0 ? 0.45 : 1.0;
+      const accel = getSwimAccel() * oilSlow * jellySlow;
       diver.vx += ax * accel * dt;
       diver.vy += ay * accel * dt;
 
@@ -2250,6 +3112,10 @@
       shopBtn.disabled = !diver.nearBoat;
 
       if (atSurface) {
+        if (diver.jellySlowTimer > 0) {
+          diver.jellySlowTimer = 0;
+          showToast('🌊 Sting numbness washed away at the surface — full speed again!');
+        }
         diver.oxygen = Math.min(getMaxOxygen(), diver.oxygen + 42 * dt);
       } else {
         const depthFactor = 1 + ((diver.y - SURFACE_Y) / z.worldHeight) * 0.45;
@@ -2339,6 +3205,23 @@
         }
       }
 
+      // 4B. Messages in Bottles
+      for (const b of game.bottles) {
+        if (b.collected) continue;
+        b.phase += dt * 2.0;
+        let bd = dist(diver.x, diver.y, b.x, b.y);
+        if (vacActive && bd < vacRange * 0.9 && bd > 6) {
+          const bang = Math.atan2(diver.y - b.y, diver.x - b.x);
+          b.x += Math.cos(bang) * 150 * dt;
+          b.y += Math.sin(bang) * 150 * dt;
+          bd = dist(diver.x, diver.y, b.x, b.y);
+        }
+        if (bd < 38) {
+          openBottleLetter(b);
+          break;
+        }
+      }
+
       // 5. Collectible Eco-Pearls
       for (let i = game.ecoPearls.length - 1; i >= 0; i--) {
         const pearl = game.ecoPearls[i];
@@ -2400,7 +3283,7 @@
         t.x += t.vx * dt;
         t.y += t.vy * dt;
 
-        if (d < 34) {
+        if (d < 34 && !(t.noPickupUntil > game.time)) {
           if (diver.bag.length < bagCap) {
             diver.bag.push(t);
             game.trashItems.splice(i, 1);
@@ -2590,13 +3473,17 @@
           diver.vx = Math.cos(pushAng) * 310;
           diver.vy = Math.sin(pushAng) * 310;
           diver.stunTimer = 0.55;
+          diver.jellySlowTimer = 6;
           diver.oxygen = Math.max(0, diver.oxygen - 7);
           j.zapTimer = 0.55;
           sound.playShock();
           spawnParticles(diver.x, diver.y, 14, '#e879f9', 110, 4);
-          addFloatingText(diver.x, diver.y - 20, '⚡ Jellyfish Sting! -7 O₂', '#f472b6');
+          addFloatingText(diver.x, diver.y - 20, '⚡ Jellyfish Sting! -7 O₂ • Slowed!', '#f472b6');
         }
       }
+
+      // 10B. Reef Sharks
+      updateSharks(dt);
 
       // 11. Scan Free-Swimming Sticker Fishies & Hero Marine Creatures (Turtle, Manta, Dolphin)
       const purityNorm = game.purity / 100;
@@ -2689,7 +3576,13 @@
         bagPill.classList.remove('bag-full');
       }
 
+      const tod = getTimeOfDayLabel();
+      document.getElementById('timeIcon').textContent = tod.icon;
+      document.getElementById('timeText').textContent = tod.text;
       document.getElementById('pearlsText').textContent = playerStats.totalPearlsCollected;
+      const bottlesTotal = game.bottles.length;
+      const bottlesGot = game.bottles.filter((b) => b.collected).length;
+      document.getElementById('bottlesText').textContent = `${bottlesGot}/${bottlesTotal}`;
       document.getElementById('coinsText').textContent = playerStats.coins;
       document.getElementById('indexHudCount').textContent = `${getDiscoveredCount()}/${SPECIES_CATALOG.length}`;
     }
@@ -2773,10 +3666,16 @@
           <div class="species-meta">
             <span class="meta-chip">${sp.habitat}</span>
             ${isFound ? `<span class="meta-chip count-chip">Logged ${record.count}x</span>` : ''}
+            ${playerStats.lettersFound[sp.id] ? '<span class="meta-chip letter-chip">📜 Letter</span>' : ''}
           </div>
           <div class="species-desc">
             ${isFound ? sp.bio : `🔍 ${sp.hint}`}
           </div>
+          ${playerStats.lettersFound[sp.id]
+            ? (isFound
+              ? `<div class="species-letter">📜 <strong>Field Letter</strong> — ${SPECIES_LETTERS[sp.id].fact}</div>`
+              : `<div class="species-letter">📜 Letter found in a bottle! Spot this species in the wild to unlock its entry.</div>`)
+            : ''}
         `;
 
         grid.appendChild(card);
@@ -2812,6 +3711,8 @@
         drawMantaSpecimen(targetCtx, 1.15, time * 4.5, 1);
       } else if (speciesId === 'dolphin') {
         drawDolphinSpecimen(targetCtx, 1.18, time * 5.0, 1);
+      } else if (speciesId === 'shark') {
+        drawSharkSpecimen(targetCtx, 1.25, time * 5.0, 1);
       }
 
       targetCtx.restore();
@@ -2950,7 +3851,7 @@
       document.getElementById('startOverlay').classList.add('hidden');
       initZone(0);
       game.mode = 'playing';
-      showToast('🤿 Swim near wildlife to document species & hold SPACE to vacuum pollution!');
+      showToast('🤿 Swim near wildlife to document species & hold SPACE to vacuum! A 🍾 message in a bottle lies somewhere on the seabed…');
     });
 
     document.getElementById('indexBtn').addEventListener('click', () => {
@@ -2967,6 +3868,10 @@
       openShop();
     });
 
+    document.getElementById('closeLetterBtn').addEventListener('click', () => {
+      closeBottleLetter();
+    });
+
     document.getElementById('closeShopBtn').addEventListener('click', () => {
       closeShop();
     });
@@ -2976,7 +3881,7 @@
       const nextIdx = (game.zoneIndex + 1) % ZONES.length;
       initZone(nextIdx);
       game.mode = 'playing';
-      showToast(`🌊 Welcome to ${ZONES[nextIdx].name}!`);
+      showToast(`🌊 Welcome to ${ZONES[nextIdx].name}! ${game.bottles.length > 1 ? game.bottles.length + ' 🍾 bottles are' : 'A 🍾 bottle is'} hidden on the seabed.`);
     });
 
     document.getElementById('muteBtn').addEventListener('click', () => {
@@ -3271,6 +4176,16 @@
     function drawJellyfish(j) {
       ctx.save();
       ctx.translate(j.x, j.y);
+      const nightGlow = 1 - game.daylight;
+      if (nightGlow > 0.05) {
+        const gl = ctx.createRadialGradient(0, 0, 6, 0, 0, 78);
+        gl.addColorStop(0, j.variant === 'rosy' ? `rgba(244, 114, 182, ${0.5 * nightGlow})` : `rgba(192, 132, 252, ${0.5 * nightGlow})`);
+        gl.addColorStop(1, 'rgba(192, 132, 252, 0)');
+        ctx.fillStyle = gl;
+        ctx.beginPath();
+        ctx.arc(0, 0, 78, 0, Math.PI * 2);
+        ctx.fill();
+      }
       drawJellyfishSpecimen(ctx, j, 1.0);
       drawScanReticle(ctx, j, 34);
       ctx.restore();
@@ -3605,6 +4520,121 @@
       targetCtx.fill();
 
       targetCtx.restore();
+    }
+
+
+    function drawSharkSpecimen(targetCtx, scale = 1, phase = 0, dir = 1, alert = false) {
+      targetCtx.save();
+      targetCtx.scale(dir * scale, scale);
+      const wag = Math.sin(phase * 1.3) * 4.5;
+
+      const traceShark = () => {
+        targetCtx.beginPath();
+        targetCtx.moveTo(41, 3);
+        targetCtx.quadraticCurveTo(32, -6, 16, -9);
+        targetCtx.lineTo(8, -10);
+        targetCtx.quadraticCurveTo(4, -22, -3, -28);
+        targetCtx.quadraticCurveTo(-5, -16, -9, -10);
+        targetCtx.quadraticCurveTo(-22, -7, -32, -3 + wag);
+        targetCtx.lineTo(-45, -19 + wag);
+        targetCtx.quadraticCurveTo(-39, -6 + wag, -38, -1 + wag);
+        targetCtx.quadraticCurveTo(-39, 6 + wag, -42, 13 + wag);
+        targetCtx.lineTo(-31, 3 + wag);
+        targetCtx.quadraticCurveTo(-14, 10, 6, 11);
+        targetCtx.quadraticCurveTo(26, 12, 34, 8);
+        targetCtx.quadraticCurveTo(41, 6, 41, 3);
+        targetCtx.closePath();
+      };
+
+      traceShark();
+      targetCtx.lineWidth = 9.0;
+      targetCtx.lineJoin = 'round';
+      targetCtx.strokeStyle = '#ffffff';
+      targetCtx.stroke();
+
+      const grad = targetCtx.createLinearGradient(0, -20, 0, 12);
+      grad.addColorStop(0, '#64748b');
+      grad.addColorStop(0.45, '#94a3b8');
+      grad.addColorStop(0.68, '#cbd5e1');
+      grad.addColorStop(1, '#f8fafc');
+      targetCtx.fillStyle = grad;
+      targetCtx.fill();
+      targetCtx.lineWidth = 2.6;
+      targetCtx.strokeStyle = '#4a2511';
+      targetCtx.stroke();
+
+      // Pectoral fin
+      targetCtx.beginPath();
+      targetCtx.moveTo(12, 6);
+      targetCtx.quadraticCurveTo(4, 14, -4, 22);
+      targetCtx.quadraticCurveTo(0, 12, -2, 8);
+      targetCtx.closePath();
+      targetCtx.fillStyle = '#94a3b8';
+      targetCtx.fill();
+      targetCtx.lineWidth = 2.2;
+      targetCtx.stroke();
+
+      // Gill slits
+      targetCtx.lineWidth = 1.6;
+      targetCtx.strokeStyle = 'rgba(74, 37, 17, 0.7)';
+      for (let g = 0; g < 3; g++) {
+        targetCtx.beginPath();
+        targetCtx.moveTo(15 - g * 3.5, -3);
+        targetCtx.quadraticCurveTo(13 - g * 3.5, 1, 15 - g * 3.5, 4.5);
+        targetCtx.stroke();
+      }
+
+      // Mouth and teeth
+      targetCtx.strokeStyle = '#4a2511';
+      targetCtx.lineWidth = 2;
+      targetCtx.beginPath();
+      targetCtx.moveTo(37, 5.5);
+      targetCtx.quadraticCurveTo(31, 9, 25, 7);
+      targetCtx.stroke();
+      targetCtx.fillStyle = '#ffffff';
+      for (let t = 0; t < 3; t++) {
+        targetCtx.beginPath();
+        targetCtx.moveTo(34 - t * 3.2, 6.6 + t * 0.4);
+        targetCtx.lineTo(33 - t * 3.2, 9.4 + t * 0.2);
+        targetCtx.lineTo(31.6 - t * 3.2, 7.2 + t * 0.6);
+        targetCtx.closePath();
+        targetCtx.fill();
+      }
+
+      // Eye
+      targetCtx.fillStyle = alert ? '#ef4444' : '#4a2511';
+      targetCtx.beginPath();
+      targetCtx.arc(28, -1.4, 2.7, 0, Math.PI * 2);
+      targetCtx.fill();
+      targetCtx.fillStyle = '#ffffff';
+      targetCtx.beginPath();
+      targetCtx.arc(27.1, -2.4, 1, 0, Math.PI * 2);
+      targetCtx.fill();
+
+      targetCtx.restore();
+    }
+
+    function drawShark(sh) {
+      ctx.save();
+      ctx.translate(sh.x, sh.y);
+      ctx.rotate(sh.angle * sh.facing);
+      const alert = sh.state === 'chase';
+      if (alert) {
+        const pulse = 0.5 + 0.5 * Math.sin(game.time * 12);
+        const aura = ctx.createRadialGradient(0, 0, 10, 0, 0, 80);
+        aura.addColorStop(0, `rgba(239, 68, 68, ${0.12 + pulse * 0.14})`);
+        aura.addColorStop(1, 'rgba(239, 68, 68, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(0, 0, 80, 0, Math.PI * 2);
+        ctx.fill();
+      }
+      drawSharkSpecimen(ctx, 1.45, sh.phase, sh.facing, alert);
+      ctx.restore();
+      ctx.save();
+      ctx.translate(sh.x, sh.y);
+      drawScanReticle(ctx, sh, 52);
+      ctx.restore();
     }
 
     function drawScanReticle(targetCtx, entity, radius = 26) {
@@ -4049,6 +5079,48 @@
       ctx.drawImage(darkCanvas, 0, 0, viewW, viewH);
     }
 
+
+    function renderNightVeil(camX, camY) {
+      const night = 1 - game.daylight;
+      if (night < 0.04) return;
+
+      darkCtx.save();
+      darkCtx.globalCompositeOperation = 'source-over';
+      darkCtx.clearRect(0, 0, viewW, viewH);
+
+      const surfY = Math.max(0, SURFACE_Y - camY);
+      darkCtx.fillStyle = `rgba(3, 10, 34, ${0.68 * night})`;
+      darkCtx.fillRect(0, surfY, viewW, viewH - surfY);
+
+      darkCtx.globalCompositeOperation = 'destination-out';
+      const hole = (wx, wy, r, a0, a1 = 0) => {
+        const sx = wx - camX;
+        const sy = wy - camY;
+        if (sx < -r || sx > viewW + r || sy < -r || sy > viewH + r) return;
+        const g = darkCtx.createRadialGradient(sx, sy, 4, sx, sy, r);
+        g.addColorStop(0, `rgba(0, 0, 0, ${a0})`);
+        g.addColorStop(0.6, `rgba(0, 0, 0, ${a0 * 0.5})`);
+        g.addColorStop(1, `rgba(0, 0, 0, ${a1})`);
+        darkCtx.fillStyle = g;
+        darkCtx.beginPath();
+        darkCtx.arc(sx, sy, r, 0, Math.PI * 2);
+        darkCtx.fill();
+      };
+
+      hole(game.diver.x, game.diver.y, 240, 0.96);
+      hole(game.boat.x, game.boat.y + 20, 190, 0.85);
+      for (const j of game.jellyfish) hole(j.x, j.y, 100, 0.8);
+      for (const b of game.bottles) if (!b.collected) hole(b.x, b.y, 90, 0.75);
+      for (const pearl of game.ecoPearls) hole(pearl.x, pearl.y, 60, 0.9);
+      for (const clam of game.giantPearlClams) {
+        if (clam.openAnim > 0.02) hole(clam.x, clam.y - 8, 90 + clam.openAnim * 80, 0.9 * clam.openAnim);
+      }
+      for (const sh of game.sharks) hole(sh.x, sh.y, 70, sh.state === 'chase' ? 0.55 : 0.32);
+
+      darkCtx.restore();
+      ctx.drawImage(darkCanvas, 0, 0, viewW, viewH);
+    }
+
     // ---------------------------------------------------------------------------
     // 14. MAIN PROCEDURAL RENDERING PIPELINE
     // ---------------------------------------------------------------------------
@@ -4062,24 +5134,82 @@
 
       const screenSurfaceY = SURFACE_Y - camY;
       if (screenSurfaceY > -40) {
+        const dl = game.daylight;
+        const mix = (a, b, t) => [a[0] + (b[0] - a[0]) * t, a[1] + (b[1] - a[1]) * t, a[2] + (b[2] - a[2]) * t];
+        const dayTop = mix([95, 105, 102], [56, 189, 248], p);
+        const dayBot = mix([155, 160, 142], [186, 230, 253], p);
+        let skyTop = mix([5, 9, 30], dayTop, dl);
+        let skyBot = mix([22, 34, 76], dayBot, dl);
+        const warm = Math.max(0, 1 - Math.abs(game.sunHeight) / 0.32) * 0.65;
+        skyBot = mix(skyBot, [253, 164, 110], warm);
+        skyTop = mix(skyTop, [120, 90, 150], warm * 0.35);
+
         const skyGrad = ctx.createLinearGradient(0, 0, 0, Math.max(10, screenSurfaceY));
-        skyGrad.addColorStop(0, lerpRGB([95, 105, 102], [56, 189, 248], p));
-        skyGrad.addColorStop(1, lerpRGB([155, 160, 142], [186, 230, 253], p));
+        skyGrad.addColorStop(0, `rgb(${skyTop[0] | 0}, ${skyTop[1] | 0}, ${skyTop[2] | 0})`);
+        skyGrad.addColorStop(1, `rgb(${skyBot[0] | 0}, ${skyBot[1] | 0}, ${skyBot[2] | 0})`);
         ctx.fillStyle = skyGrad;
         ctx.fillRect(0, 0, viewW, Math.max(0, screenSurfaceY + 12));
 
-        const sunX = viewW * 0.78;
-        const sunY = screenSurfaceY * 0.35;
-        if (sunY > -60) {
+        // Stars
+        const starAlpha = Math.max(0, 1 - dl * 1.6);
+        if (starAlpha > 0.02) {
           ctx.save();
-          ctx.globalAlpha = 0.25 + p * 0.75;
-          const sunGlow = ctx.createRadialGradient(sunX, sunY, 8, sunX, sunY, 95);
-          sunGlow.addColorStop(0, '#fef08a');
-          sunGlow.addColorStop(0.4, 'rgba(253, 224, 71, 0.45)');
+          for (let i = 0; i < 46; i++) {
+            const sx = ((i * 137.5) % 1) * 0 + ((i * 97 + 31) % 100) / 100 * viewW;
+            const sy = (((i * 53 + 17) % 100) / 100) * Math.max(10, screenSurfaceY - 18);
+            const tw = 0.55 + 0.45 * Math.sin(game.time * 2 + i * 1.7);
+            ctx.globalAlpha = starAlpha * tw;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(sx, sy, i % 5 === 0 ? 1.8 : 1.1, 0, Math.PI * 2);
+            ctx.fill();
+          }
+          ctx.restore();
+        }
+
+        const arc = (t) => {
+          const f = (t - 0.25) / 0.5;
+          const h = Math.sin(Math.PI * 2 * (t - 0.25));
+          return {
+            x: viewW * (0.08 + 0.84 * f),
+            y: screenSurfaceY - 10 - Math.max(0, h) * Math.max(30, screenSurfaceY - 52),
+            up: h > -0.05 && f >= 0 && f <= 1
+          };
+        };
+
+        const sun = arc(game.dayTime);
+        if (sun.up) {
+          ctx.save();
+          ctx.globalAlpha = (0.25 + p * 0.75) * (0.4 + 0.6 * dl);
+          const sunGlow = ctx.createRadialGradient(sun.x, sun.y, 8, sun.x, sun.y, 95);
+          sunGlow.addColorStop(0, warm > 0.2 ? '#fdba74' : '#fef08a');
+          sunGlow.addColorStop(0.4, warm > 0.2 ? 'rgba(251, 146, 60, 0.45)' : 'rgba(253, 224, 71, 0.45)');
           sunGlow.addColorStop(1, 'rgba(253, 224, 71, 0)');
           ctx.fillStyle = sunGlow;
           ctx.beginPath();
-          ctx.arc(sunX, sunY, 95, 0, Math.PI * 2);
+          ctx.arc(sun.x, sun.y, 95, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.restore();
+        }
+
+        const moon = arc((game.dayTime + 0.5) % 1);
+        if (moon.up) {
+          ctx.save();
+          ctx.globalAlpha = Math.max(0, 1 - dl * 1.3);
+          const moonGlow = ctx.createRadialGradient(moon.x, moon.y, 6, moon.x, moon.y, 70);
+          moonGlow.addColorStop(0, 'rgba(226, 232, 240, 0.55)');
+          moonGlow.addColorStop(1, 'rgba(226, 232, 240, 0)');
+          ctx.fillStyle = moonGlow;
+          ctx.beginPath();
+          ctx.arc(moon.x, moon.y, 70, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = '#f1f5f9';
+          ctx.beginPath();
+          ctx.arc(moon.x, moon.y, 14, 0, Math.PI * 2);
+          ctx.fill();
+          ctx.fillStyle = `rgb(${skyBot[0] | 0}, ${skyBot[1] | 0}, ${skyBot[2] | 0})`;
+          ctx.beginPath();
+          ctx.arc(moon.x + 6, moon.y - 3, 12, 0, Math.PI * 2);
           ctx.fill();
           ctx.restore();
         }
@@ -4094,7 +5224,7 @@
 
       if (p > 0.08) {
         ctx.save();
-        ctx.globalAlpha = p * 0.22;
+        ctx.globalAlpha = p * 0.22 * (0.12 + 0.88 * game.daylight);
         for (let i = 0; i < 6; i++) {
           const rayWorldX = 240 + i * 320 + Math.sin(game.time * 0.45 + i) * 45;
           const rx = rayWorldX - camX;
@@ -4177,6 +5307,10 @@
         drawEcoPearl(pearl);
       }
 
+      for (const b of game.bottles) {
+        if (!b.collected) drawMessageBottle(b);
+      }
+
       for (const f of game.ambientFish) {
         if (p < f.threshold) continue;
         drawAmbientFish(f);
@@ -4186,6 +5320,8 @@
         if (p < h.threshold) continue;
         drawHeroCreature(h);
       }
+
+      for (const sh of game.sharks) drawShark(sh);
 
       drawSurfaceBoat(game.boat);
       drawWaves(z.worldWidth, p);
@@ -4238,6 +5374,33 @@
       ctx.restore();
 
       renderDepthDarknessVeil(camX, camY);
+      renderNightVeil(camX, camY);
+
+      if (game.mode === 'playing' && game.sharkThreat > 0.12) {
+        const sp = 0.5 + 0.5 * Math.sin(game.time * (6 + game.sharkThreat * 8));
+        const svig = ctx.createRadialGradient(viewW / 2, viewH / 2, viewW * 0.28, viewW / 2, viewH / 2, viewW * 0.7);
+        svig.addColorStop(0, 'rgba(127, 29, 29, 0)');
+        svig.addColorStop(1, `rgba(185, 28, 28, ${(0.1 + sp * 0.12) * (0.4 + game.sharkThreat)})`);
+        ctx.fillStyle = svig;
+        ctx.fillRect(0, 0, viewW, viewH);
+      }
+
+      if (game.mode === 'playing') {
+        for (const sh of game.sharks) {
+          if (sh.state !== 'chase') continue;
+          const sx = sh.x - camX;
+          const sy = sh.y - camY;
+          if (sx > 30 && sx < viewW - 30 && sy > 30 && sy < viewH - 30) continue;
+          const ax = Math.max(36, Math.min(viewW - 36, sx));
+          const ay = Math.max(86, Math.min(viewH - 70, sy));
+          ctx.save();
+          ctx.globalAlpha = 0.65 + 0.35 * Math.sin(game.time * 10);
+          ctx.font = '26px sans-serif';
+          ctx.textAlign = 'center';
+          ctx.fillText('🦈', ax, ay);
+          ctx.restore();
+        }
+      }
 
       const o2Ratio = game.diver.oxygen / getMaxOxygen();
       if (o2Ratio < 0.25 && game.mode === 'playing') {
@@ -4305,6 +5468,101 @@
       ctx.beginPath();
       ctx.arc(-2.5, -2.5, 2, 0, Math.PI * 2);
       ctx.fill();
+      ctx.restore();
+    }
+
+
+    function drawMessageBottle(b) {
+      const bob = Math.sin(b.phase) * 3;
+      const glow = 0.5 + 0.5 * Math.sin(game.time * 3 + b.phase);
+
+      ctx.save();
+      ctx.translate(b.x, b.y + bob);
+
+      // Pulsing golden halo so the bottle is easy to spot
+      const halo = ctx.createRadialGradient(0, 0, 4, 0, 0, 46);
+      halo.addColorStop(0, `rgba(253, 230, 138, ${0.38 + glow * 0.25})`);
+      halo.addColorStop(1, 'rgba(253, 230, 138, 0)');
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.arc(0, 0, 46, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.rotate(b.tilt);
+
+      // Glass body (drawn upright, then tilted)
+      ctx.beginPath();
+      ctx.moveTo(-6, -22);
+      ctx.lineTo(-6, -10);
+      ctx.quadraticCurveTo(-15, -6, -15, 4);
+      ctx.lineTo(-15, 16);
+      ctx.quadraticCurveTo(-15, 24, -7, 24);
+      ctx.lineTo(7, 24);
+      ctx.quadraticCurveTo(15, 24, 15, 16);
+      ctx.lineTo(15, 4);
+      ctx.quadraticCurveTo(15, -6, 6, -10);
+      ctx.lineTo(6, -22);
+      ctx.closePath();
+      const glass = ctx.createLinearGradient(-15, 0, 15, 0);
+      glass.addColorStop(0, 'rgba(165, 243, 252, 0.85)');
+      glass.addColorStop(0.5, 'rgba(207, 250, 254, 0.55)');
+      glass.addColorStop(1, 'rgba(94, 234, 212, 0.75)');
+      ctx.fillStyle = glass;
+      ctx.fill();
+      ctx.lineWidth = 2;
+      ctx.strokeStyle = '#0f4c5c';
+      ctx.stroke();
+
+      // Rolled letter inside
+      ctx.save();
+      ctx.rotate(0.12);
+      ctx.fillStyle = '#fff3c4';
+      ctx.fillRect(-6, -2, 12, 22);
+      ctx.strokeStyle = '#b45309';
+      ctx.lineWidth = 1.3;
+      ctx.strokeRect(-6, -2, 12, 22);
+      ctx.strokeStyle = 'rgba(146, 64, 14, 0.7)';
+      ctx.lineWidth = 1;
+      for (let ly = 3; ly <= 15; ly += 4) {
+        ctx.beginPath();
+        ctx.moveTo(-3.5, ly);
+        ctx.lineTo(3.5, ly);
+        ctx.stroke();
+      }
+      ctx.fillStyle = '#ef4444';
+      ctx.fillRect(-6, 8, 12, 2.5);
+      ctx.restore();
+
+      // Cork
+      ctx.fillStyle = '#c08a4d';
+      ctx.fillRect(-7, -30, 14, 9);
+      ctx.strokeStyle = '#4a2511';
+      ctx.lineWidth = 1.8;
+      ctx.strokeRect(-7, -30, 14, 9);
+
+      // Glass shine
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.85)';
+      ctx.lineWidth = 2.2;
+      ctx.lineCap = 'round';
+      ctx.beginPath();
+      ctx.moveTo(-10, 2);
+      ctx.lineTo(-10, 16);
+      ctx.stroke();
+
+      ctx.restore();
+
+      // Twinkling sparkles
+      ctx.save();
+      ctx.translate(b.x, b.y + bob);
+      ctx.fillStyle = `rgba(255, 255, 255, ${0.35 + glow * 0.6})`;
+      for (let k = 0; k < 3; k++) {
+        const a = game.time * 1.3 + k * 2.1 + b.phase;
+        const sx = Math.cos(a) * 30;
+        const sy = Math.sin(a * 1.2) * 24 - 6;
+        ctx.beginPath();
+        ctx.arc(sx, sy, 1.8 + glow * 1.4, 0, Math.PI * 2);
+        ctx.fill();
+      }
       ctx.restore();
     }
 
@@ -4376,6 +5634,20 @@
     function drawDiver(d) {
       ctx.save();
       ctx.translate(d.x, d.y);
+
+      if (d.jellySlowTimer > 0) {
+        const pulse = 0.5 + 0.5 * Math.sin(game.time * 9);
+        const aura = ctx.createRadialGradient(0, 0, 6, 0, 0, 40);
+        aura.addColorStop(0, `rgba(232, 121, 249, ${0.18 + pulse * 0.14})`);
+        aura.addColorStop(1, 'rgba(232, 121, 249, 0)');
+        ctx.fillStyle = aura;
+        ctx.beginPath();
+        ctx.arc(0, 0, 40, 0, Math.PI * 2);
+        ctx.fill();
+        if (Math.random() < 0.12) {
+          spawnParticles(d.x + (Math.random() - 0.5) * 24, d.y + (Math.random() - 0.5) * 24, 1, '#e879f9', 30, 2.5);
+        }
+      }
 
       if (d.vacuumActive) {
         const range = getVacuumRange();
@@ -4751,8 +6023,18 @@
       lastTimestamp = timestamp;
 
       update(dt);
+      {
+        const zc = ZONES[game.zoneIndex];
+        const depthRatio = Math.max(0, Math.min(1, (game.diver.y - SURFACE_Y) / Math.max(1, zc.worldHeight - 135 - SURFACE_Y)));
+        sound.updateAmbient(dt, {
+          depth: depthRatio,
+          daylight: game.daylight,
+          threat: game.mode === 'playing' ? game.sharkThreat : 0
+        });
+      }
       render();
       renderSpeciesIndexPortraits();
+      renderLetterPortrait();
 
       requestAnimationFrame(gameLoop);
     }
